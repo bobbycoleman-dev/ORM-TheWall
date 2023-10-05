@@ -1,0 +1,17 @@
+@{
+    int? LoggedInUser = Context.Session.GetInt32("UserId");
+    string UserName = Context.Session.GetString("UserName");
+}
+@model Comment
+<div class="card-footer">
+    <form asp-action="CreateComment" asp-controller="Wall" method="post">
+        <input type="hidden" asp-for="UserId" value=@LoggedInUser>
+        <input type="hidden" asp-for="MessageId" value=@Model.MessageId>
+        <div class="mb-3">
+            <label asp-for="CommentText" class="form-label"></label>
+            <textarea asp-for="CommentText" class="form-control" cols="30" rows="2"></textarea>
+            <span class="text-danger" asp-validation-for="CommentText"></span>
+        </div>
+        <div class="text-end"><button class="btn btn-sm btn-primary">Comment</button></div>
+    </form>
+</div>
